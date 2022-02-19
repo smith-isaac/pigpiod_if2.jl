@@ -1,0 +1,4 @@
+name = "pigpiod_if2"
+uuid = "700dc619-d739-4bc1-a003-0f28c1dd96fa"
+authors = ["Isaac <smithisaacr@gmail.com>"]
+version = "0.1.0"
