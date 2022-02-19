@@ -2,3 +2,6 @@ name = "pigpiod_if2"
 uuid = "700dc619-d739-4bc1-a003-0f28c1dd96fa"
 authors = ["Isaac <smithisaacr@gmail.com>"]
 version = "0.1.0"
+
+[deps]
+Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
