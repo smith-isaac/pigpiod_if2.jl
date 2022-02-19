@@ -4,5 +4,6 @@ Julia wrapper for [pigpio_if2 C library](https://abyz.me.uk/rpi/pigpio/pdif2.htm
 ## TODO
 ---
 - [ ] Figure out how to reference `pigpiod_if2.so` from pigpio library when calling `using pigpiod_if2`
+  - Maybe use [BinaryBuilder](https://docs.binarybuilder.org/stable/) to build the C library instead of trying to call `Libdl.dlopen` within the module
 - [ ] Add all global variables (variables defined in `pigpio.h` file using `#define`
 - [ ] Create wrappers for functions from C library
