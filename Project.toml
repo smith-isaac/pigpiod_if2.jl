@@ -5,3 +5,4 @@ version = "0.1.0"
 
 [deps]
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+pigpiod_if2_jll = "50515f5d-e8ff-5b26-ab2b-0473a017b18c"
