@@ -126,8 +126,6 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 
 [[deps.pigpiod_if2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "0aca85aae2f0405d881b1172e31e6919c5a129f6"
-repo-rev = "main"
-repo-url = "https://github.com/smith-isaac/pigpiod_if2_jll.jl"
+git-tree-sha1 = "afd0b98b3b28dca86a3a2d1c5529a5f661bd2069"
 uuid = "50515f5d-e8ff-5b26-ab2b-0473a017b18c"
-version = "0.0.1+0"
+version = "79.0.0+0"
