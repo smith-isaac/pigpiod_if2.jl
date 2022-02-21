@@ -1,7 +1,7 @@
 module pigpiod_if2
 
 using Libdl
-lib = Libdl.dlopen("./pigpiod_if2.so")
+using pigpiod_if2_jll
 
 export PI_INPUT, PI_OUTPUT
 export PI_PUD_UP, PI_PUD_OFF, PI_PUD_DOWN
