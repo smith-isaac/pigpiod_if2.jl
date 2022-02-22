@@ -1,10 +1,27 @@
 # pigpiod_if2.jl
 Julia wrapper for [pigpio_if2 C library](https://abyz.me.uk/rpi/pigpio/pdif2.html)
 
+## Calling functions from pigpiod_if2 C library
+---
+Uses [pigpiod_if2_jll](https://github.com/JuliaRegistries/General/tree/master/P/pigpiod_if2_jll), can add by using `]add pigpiod_if2_jll`. Shared library is referenced using `libpigpiod_if2` instead of path to `pigpiod_if2.so`. Example:
+
+```julia
+clib = Libdl.dlopen(libpigpiod_if2)
+start = Libdl.dlsym(clib, :pigpio_start)
+ccall(start, Cint, (Cstring, Cstring), Nothing, Nothing)
+```
+
+Can also be used in tuple mode. Example:
+
+```julia
+ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothing)
+```
+
+
 ## TODO
 ---
 - [x] Figure out how to reference `pigpiod_if2.so` from pigpio library when calling `using pigpiod_if2`
-  - Used [BinaryBuilder](https://docs.binarybuilder.org/stable/) to build [pigpiod_if2_jll](https://github.com/smith-isaac/pigpiod_if2_jll.jl) ([build_tarballs.jl](https://github.com/smith-isaac/Yggdrasil/blob/pigpiod_if2/P/pigpiod_if2/build_tarballs.jl))
-  - Add using `]add https://github.com/smith-isaac/pigpiod_if2_jll.jl`
+  - Add using `]add pigpiod_if2_jll`
+  - `pigpiod_if2.so` file is referenced by `libpigpiod_if2` variable
 - [ ] Add all global variables (variables defined in `pigpio.h` file using `#define`)
 - [ ] Create wrappers for functions from C library
