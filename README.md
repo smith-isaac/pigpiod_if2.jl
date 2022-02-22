@@ -24,4 +24,21 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - Add using `]add pigpiod_if2_jll`
   - `pigpiod_if2.so` file is referenced by `libpigpiod_if2` variable
 - [ ] Add all global variables (variables defined in `pigpio.h` file using `#define`)
-- [ ] Create wrappers for functions from C library
+  - Will do this as I write functions to see which global variables are needed
+- Create wrappers for functions from C library (organizing by type)
+  - [x] Essential
+  - [x] Basic
+  - [ ] PWM
+  - [ ] Servo
+  - [ ] Intermediate
+  - [ ] Advanced
+  - [ ] Custom
+  - [ ] Events
+  - [ ] Scripts
+  - [ ] I2C (Bit Bang)
+  - [ ] I2C/SPI Slave
+  - [ ] Serial (Bit Bang)
+  - [ ] SPI (Bit Bang)
+  - [ ] Files
+  - [ ] Waves
+  - [ ] Utilities
