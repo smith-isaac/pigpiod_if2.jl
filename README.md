@@ -1,6 +1,8 @@
 # pigpiod_if2.jl
 Julia wrapper for [pigpio_if2 C library](https://abyz.me.uk/rpi/pigpio/pdif2.html)
 
+Intended functionality is to be exactly the same as the C library. Maybe after getting the whole library wrapped I will look at making some improvements.
+
 ## Calling functions from pigpiod_if2 C library
 ---
 Uses [pigpiod_if2_jll](https://github.com/JuliaRegistries/General/tree/master/P/pigpiod_if2_jll), can add by using `]add pigpiod_if2_jll`. Shared library is referenced using `libpigpiod_if2` instead of path to `pigpiod_if2.so`. Example:
