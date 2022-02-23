@@ -84,6 +84,7 @@ and in turn `f_c` is last argument passed to the `callback` function. `Ref{Param
   - `pigpiod_if2.so` file is referenced by `libpigpiod_if2` variable
 - [ ] Add all global variables (variables defined in `pigpio.h` file using `#define`)
   - Will do this as I write functions to see which global variables are needed
+- [ ] Break out function wrappers into separate files (i.e. `basic.jl`, `intermediate.jl`, ...)
 - Create wrappers for functions from C library (organizing by type)
   - [x] Essential
   - [x] Basic
