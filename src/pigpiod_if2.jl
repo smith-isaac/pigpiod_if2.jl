@@ -43,8 +43,68 @@ function gpio_write(p::Int32, gpio::Int, level::PIN_LEVEL)
 end
 
 # PWM
+export set_PWM_range, set_PWM_frequency, set_PWM_dutycycle, get_PWM_range, get_PWM_dutycycle, get_PWM_frequency, get_PWM_real_range
+# set_PWM_dutycycle
+function set_PWM_dutycycle(p::Int32, gpio::Int, dutycycle::Int)
+    return ccall((:set_PWM_dutycycle, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, dutycycle)
+end
+
+# set_PWM_frequency
+function set_PWM_frequency(p::Int32, gpio::Int, frequency::Int)
+    return ccall((:set_PWM_frequency, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, frequency)
+end
+
+# set_PWM_range
+function set_PWM_range(p::Int32, gpio::Int, r::Int)
+    return ccall((:set_PWM_range, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, r)
+end
+
+# get_PWM_dutycycle
+function get_PWM_dutycycle(p::Int32, gpio::Int)
+    return ccall((:get_PWM_dutycycle, libpigpiod_if2), Int32, (Int32, UInt32), p, gpio)
+end
+
+# get_PWM_frequency
+function get_PWM_frequency(p::Int32, gpio::Int)
+    return ccall((:get_PWM_frequency, libpigpiod_if2), Int32, (Int32, UInt32), p, gpio)
+end
+
+# get_PWM_range
+function get_PWM_range(p::Int32, gpio::Int)
+    return ccall((:get_PWM_range, libpigpiod_if2), Int32, (Int32, UInt32), p, gpio)
+end
+
+# get_PWM_real_range
+function get_PWM_real_range(p::Int32, gpio::Int)
+    return ccall((:get_PWM_real_range, libpigpiod_if2), Int32, (Int32, UInt32), p, gpio)
+end
+
 # Servo
+export set_servo_pulsewidth, get_servo_pulsewidth
+# set_servo_pulsewidth
+function set_servo_pulsewidth(p::Int32, gpio::Int, pulsewidth::Int)
+    return ccall((:set_servo_pulsewidth, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, pulsewidth)
+end
+
+# get_servo_pulsewidth
+function get_servo_pulsewidth(p::Int32, gpio::Int)
+    return ccall((:get_servo_pulsewidth, libpigpiod_if2), Int32, (Int32, UInt32), p, gpio)
+end
+
 # INTERMEDIATE
+# gpio_trigger
+# set_watchdog
+# read_bank_1
+# read_bank_2
+# clear_bank_1
+# clear_bank_2
+# callback
+# callback_ex
+# callback_cancel
+# wait_for_edge
+# start_thread
+# stop_thread
+
 # ADVANCED
 # Custom
 # Events
