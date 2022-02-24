@@ -3,6 +3,18 @@ Julia wrapper for [pigpio_if2 C library](https://abyz.me.uk/rpi/pigpio/pdif2.htm
 
 Intended functionality is to be exactly the same as the C library. Maybe after getting the whole library wrapped I will look at making some improvements.
 
+## Example Usage
+```julia
+p = pigpio_start() # connecting to pigpiod on localhost
+# Named variable p since pi is a constant in julia
+led = 4
+btn = 17
+set_mode(p, led, PI_OUTPUT) # Setting LED gpio to be OUTPUT
+set_mode(p, btn, PI_INPUT) # Setting BTN to be INPUT
+gpio_write(p, led, HIGH)
+btn_state = gpio_read(p, btn)
+```
+
 #### Functions not included
 - `start_thread`
 - `stop_thread`
