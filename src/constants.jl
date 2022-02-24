@@ -287,9 +287,12 @@ PI_TIMEOUT = 2
 
 
 
-#define RISING_EDGE  0
-#define FALLING_EDGE 1
-#define EITHER_EDGE  2
+export PI_EDGES
+@enum PI_EDGES begin
+    RISING_EDGE  = 0
+    FALLING_EDGE = 1
+    EITHER_EDGE  = 2
+end
 
 
 
