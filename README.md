@@ -3,6 +3,11 @@ Julia wrapper for [pigpio_if2 C library](https://abyz.me.uk/rpi/pigpio/pdif2.htm
 
 Intended functionality is to be exactly the same as the C library. Maybe after getting the whole library wrapped I will look at making some improvements.
 
+#### Functions not included
+- `start_thread`
+- `stop_thread`
+- `shell_`
+
 ## Calling functions from pigpiod_if2 C library
 ---
 Uses [pigpiod_if2_jll](https://github.com/JuliaRegistries/General/tree/master/P/pigpiod_if2_jll), can add by using `]add pigpiod_if2_jll`. Shared library is referenced using `libpigpiod_if2` instead of path to `pigpiod_if2.so`. Example:
@@ -36,7 +41,7 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - [x] PWM
   - [x] Servo
   - [x] Intermediate (except for `start_thread` and `stop_thread`)
-  - [ ] Advanced
+  - [x] Advanced
   - [ ] Custom
   - [ ] Events
   - [ ] Scripts

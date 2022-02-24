@@ -147,6 +147,57 @@ end
 # stop_thread
 
 # ADVANCED
+# notify_open
+function notify_open(p::Int32)
+    return ccall((:notify_open, libpigpiod_if2), Int32, (Int32,), p)
+end
+
+# notify_begin
+function notify_begin(p::Int32, handle::Int32, bits::UInt32)
+    return ccall((:notify_begin, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, handle, bits)
+end
+
+# notify_pause
+function notify_pause(p::Int32, handle::Int32)
+    return ccall((:notify_pause, libpigpiod_if2), Int32, (Int32, UInt32), p, handle)
+end
+
+# notify_close
+function notify_close(p::Int32, handle::Int32)
+    return ccall((:notify_close, libpigpiod_if2), Int32, (Int32, UInt32), p, handle)
+end
+
+# hardware_clock
+function hardware_clock(p::Int32, gpio::Int, clkfreq::Int)
+    ccall((:hardware_clock, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, clkfreq)
+end
+
+# hardware_PWM
+function hardware_PWM(p::Int32, gpio::Int, PWMfreq::Int, PWMduty::Int)
+    ccall((:hardware_PWM, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, UInt32), p, gpio, PWMfreq, PWMduty)
+end
+
+# set_glitch_filter
+function set_glitch_filter(p::Int32, gpio::Int, steady::Int)
+    return ccall((:set_glitch_filter, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, steady)
+end
+
+# set_noise_filter
+function set_noise_filter(p::Int32, gpio::Int, steady::Int, active::Int)
+    return ccall((:set_noise_filter, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, UInt32), p, gpio, steady, active)
+end
+
+# set_pad_strength
+function set_pad_strength(p::Int32, pad::Int, padStrength::Int)
+    return ccall((:set_pad_strength, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, pad, padStrength)
+end
+
+# get_pad_strength
+function get_pad_strength(p::Int32, pad::Int)
+    return ccall((:get_pad_strength, libpigpiod_if2), Int32, (Int32, UInt32), p, pad)
+end
+
+# shell_ # Not necessary
 # Custom
 # Events
 # Scripts
