@@ -19,6 +19,7 @@ btn_state = gpio_read(p, btn)
 - `start_thread`
 - `stop_thread`
 - `shell_`
+- `custom_1`/`custom_2`
 
 ## Calling functions from pigpiod_if2 C library
 ---
@@ -54,7 +55,7 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - [x] Servo
   - [x] Intermediate (except for `start_thread` and `stop_thread`)
   - [x] Advanced
-  - [ ] Custom
+  - [x] Custom (Skipping)
   - [ ] Events
   - [ ] Scripts
   - [ ] I2C (Bit Bang)

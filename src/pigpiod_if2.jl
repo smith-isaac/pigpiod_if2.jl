@@ -198,8 +198,34 @@ function get_pad_strength(p::Int32, pad::Int)
 end
 
 # shell_ # Not necessary
-# Custom
+# Custom (skipping)
 # Events
+export event_callback, event_callback_ex, event_callback_cancel, event_trigger, wait_for_event
+# event_callback
+function event_callback(p::Int32, event::Int, f)
+    return ccall((:event_callback, libpigpiod_if2), Int32, (Int32, UInt32, Ptr{Cvoid}), p, event, f)
+end
+
+# event_callback_ex
+function event_callback_ex(p::Int32, event::Int, f, user_data)
+    return ccall((:event_callback_ex, libpigpiod_if2), Int32, (Int32, UInt32, Ptr{Cvoid}, Any), p, event, f, user_data)
+end
+
+# event_callback_cancel
+function event_callback_cancel(callback_id::Int)
+    return ccall((:event_callback_cancel, libpigpiod_if2), Int32, (UInt32,), callback_id)
+end
+
+# event_trigger
+function event_trigger(p::Int32, event::Int)
+    return ccall((:event_trigger, libpigpiod_if2), Int32, (Int32, UInt32), p, event)
+end
+
+# wait_for_event
+function wait_for_event(p::Int32, event::Int, timeout::Float32)
+    return ccall((:wait_for_event, libpigpiod_if2), Int32, (Int32, UInt32, Float32), p, event, timeout)
+end
+
 # Scripts
 # I2C
 # I2C BIT BANG
