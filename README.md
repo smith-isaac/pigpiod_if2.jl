@@ -57,7 +57,7 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - [x] Intermediate (except for `start_thread` and `stop_thread`)
   - [x] Advanced
   - [x] Custom (Skipping)
-  - [ ] Events
+  - [x] Events
   - [ ] Scripts
   - [ ] I2C (Bit Bang)
   - [ ] I2C/SPI Slave
