@@ -48,6 +48,7 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - Make the global variables *not* enumerations
 - [ ] Figure out how to work with the `pthread.h` library, for threading functions.
 - [ ] Break out function wrappers into separate files (i.e. `i2c.jl`, `spi.jl`, ...)
+- [ ] Figure out why the `callback` function is not working right now
 - Create wrappers for functions from C library (organizing by type)
   - [x] Essential
   - [x] Basic
