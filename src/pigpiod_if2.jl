@@ -92,6 +92,7 @@ function get_servo_pulsewidth(p::Int32, gpio::Int)
 end
 
 # INTERMEDIATE
+export gpio_trigger, set_watchdog, read_bank_1, read_bank_2, clear_bank_1, clear_bank_2, set_bank_1, set_bank_2, callback, callback_ex, callback_cancel, wait_for_edge
 # gpio_trigger
 function gpio_trigger(p::Int32, gpio::Int, pulseLen::Int, level::Int)
     return ccall((:gpio_trigger, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, UInt32), p, gpio, pulseLen, level)
@@ -116,6 +117,17 @@ end
 function clear_bank_1(p::Int32, bits::UInt32)
     return ccall((:clear_bank_1, libpigpiod_if2), Int32, (Int32, UInt32), p, bits)
 end
+
+# set_bank_1
+function set_bank_1(p::Int32, bits::UInt32)
+    return ccall((:set_bank_1, libpigpiod_if2), Int32, (Int32, UInt32), p, bits)
+end
+
+# set_bank_2
+function set_bank_2(p::Int32, bits::UInt32)
+    return ccall((:set_bank_2, libpigpiod_if2), Int32, (Int32, UInt32), p, bits)
+end
+
 
 # clear_bank_2
 function clear_bank_2(p::Int32, bits::UInt32)
