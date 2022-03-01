@@ -15,6 +15,8 @@ gpio_write(p, led, HIGH)
 btn_state = gpio_read(p, btn)
 ```
 
+Currently getting segfaults on `callback` and `callback_ex` functions. (Likely to happen on `event_callback` and `event_callback_ex`)
+
 #### Functions not included
 - `start_thread`
 - `stop_thread`
