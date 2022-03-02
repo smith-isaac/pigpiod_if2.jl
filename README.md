@@ -42,13 +42,13 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
 - [x] Figure out how to reference `pigpiod_if2.so` from pigpio library when calling `using pigpiod_if2`
   - Add using `]add pigpiod_if2_jll`
   - `pigpiod_if2.so` file is referenced by `libpigpiod_if2` variable
-- [ ] Add all global variables (variables defined in `pigpio.h` file using `#define`)
+- [x] Add all global variables (variables defined in `pigpio.h` file using `#define`)
   - Will do this as I write functions to see which global variables are needed
   - May just copy `constants.jl` from the [PiGPIO.jl](https://github.com/JuliaBerry/PiGPIO.jl) library
   - Make the global variables *not* enumerations
 - [ ] Figure out how to work with the `pthread.h` library, for threading functions.
 - [ ] Break out function wrappers into separate files (i.e. `i2c.jl`, `spi.jl`, ...)
-- [ ] Figure out why the `callback` function is not working right now
+- [ ] Figure out why the `callback` function is not working right now (getting segfaults)
 - Create wrappers for functions from C library (organizing by type)
   - [x] Essential
   - [x] Basic
@@ -58,11 +58,11 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - [x] Advanced
   - [x] Custom (Skipping)
   - [x] Events
-  - [ ] Scripts
+  - [x] Scripts
   - [ ] I2C (Bit Bang)
   - [ ] I2C/SPI Slave
   - [ ] Serial (Bit Bang)
   - [ ] SPI (Bit Bang)
   - [ ] Files
   - [ ] Waves
-  - [ ] Utilities
+  - [x] Utilities

@@ -4,10 +4,9 @@ using Libdl
 using pigpiod_if2_jll
 
 include("constants.jl")
-export PI_INPUT, PI_OUTPUT
-export PI_PUD_UP, PI_PUD_OFF, PI_PUD_DOWN
+export INPUT, OUTPUT
+export PUD_UP, PUD_OFF, PUD_DOWN
 export HIGH, LOW
-export PIGPIO_ERROR
 
 export pigpio_start, pigpio_stop, set_mode, gpio_write, get_mode, set_pull_up_down, gpio_read
 
@@ -22,7 +21,7 @@ function pigpio_stop(p::Int32)
 end
 
 # BASIC
-function set_mode(p::Int32, gpio::Int, mode::PIN_MODES)
+function set_mode(p::Int32, gpio::Int, mode::Int)
     return ccall((:set_mode, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, mode)
 end
 
@@ -30,7 +29,7 @@ function get_mode(p::Int32, gpio::Int)
     return ccall((:get_mode, libpigpiod_if2), Int32, (Int32, UInt32), p, gpio)
 end
 
-function set_pull_up_down(p::Int32, gpio::Int, pud::PUD_MODES)
+function set_pull_up_down(p::Int32, gpio::Int, pud::Int)
     return ccall((:set_pull_up_down, libpigpiod_if2), Int32, (Int32,  UInt32, UInt32), p, gpio, pud)
 end
 
@@ -38,7 +37,7 @@ function gpio_read(p::Int32, gpio::Int)
     return ccall((:gpio_read, libpigpiod_if2), Int32, (Int32, UInt32), p, gpio)
 end
 
-function gpio_write(p::Int32, gpio::Int, level::PIN_LEVEL)
+function gpio_write(p::Int32, gpio::Int, level::Int)
     return ccall((:gpio_write, libpigpiod_if2), Int32, (Int32, UInt32, UInt32), p, gpio, level)
 end
 
@@ -135,12 +134,12 @@ function clear_bank_2(p::Int32, bits::UInt32)
 end
 
 # callback
-function callback(p::Int32, gpio::Int, edge::PI_EDGES, f::Ptr{Nothing})
+function callback(p::Int32, gpio::Int, edge::Int, f::Ptr{Nothing})
     return ccall((:callback, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, Ptr{Cvoid}), p, gpio, edge, f)
 end
 
 # callback_ex
-function callback_ex(p::Int32, gpio::Int, edge::PI_EDGES, f::Ptr{Nothing}, user_data)
+function callback_ex(p::Int32, gpio::Int, edge::Int, f::Ptr{Nothing}, user_data)
     return ccall((:callback_ex, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, Ptr{Cvoid}, Any), p, gpio, edge, f, user_data)
 end
 
@@ -150,7 +149,7 @@ function callback_cancel(callback_id::Int32)
 end
 
 # wait_for_edge
-function wait_for_edge(p::Int32, gpio::Int, edge::PI_EDGES, timeout::Float32)
+function wait_for_edge(p::Int32, gpio::Int, edge::Int, timeout::Float32)
     return ccall((:wait_for_edge, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, Float32), p, gpio, edge, timeout)
 end
 
@@ -239,15 +238,46 @@ function wait_for_event(p::Int32, event::Int, timeout::Float32)
 end
 
 # Scripts
-# I2C
-# I2C BIT BANG
-# I2C/SPI SLAVE
-# SERIAL
-# SERIAL BIT BANG (read only)
-# SPI
-# SPI BIT BANG
+export store_script, run_script, update_script, script_status, stop_script, delete_script
+# store_script
+# int store_script(int pi, char *script)
+function store_script(p::Int32, script::String)
+    return ccall((:store_script, libpigpiod_if2), Int32, (Int32, Cstring), p, script)
+end
+
+# run_script
+# int run_script(int pi, unsigned script id, unsigned numPar, uint32_t *param)
+function run_script(p::Int32, script_id::Int32, numPar::Int, param::Array{Int})
+    return ccall((:run_script, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, Ptr{Cint}), p, script_id, numPar, param)
+end
+
+# update_script
+# int update_script(int pi, unsigned script_id, unsigned numPar, uint32_t *param)
+function update_script(p::Int32, script_id::Int32, numPar::Int, param::Array{Int})
+    return ccall((:update_script, libpigpiod_if2), Int32, (Int32, UInt32, UInt32, Ptr{Cint}), p, script_id, numPar, param)
+end
+
+# script_status
+# int script_status(int pi, unsigned script_id, uint32_t *param)
+function script_status(p::Int32, script_id::Int32, param::Array{Int})
+    return ccall((:script_status, libpigpiod_if2), Int32, (Int32, UInt32, Ptr{Cint}), p, script_id, param)
+end
+
+# stop_script
+# int stop_script(int pi, unsigned script_id)
+function stop_script(p::Int32, script_id::Int32)
+    return ccall((:stop_script, libpigpiod_if2), Int32, (Int32, UInt32), p, script_id)
+end
+
+# delete_script
+# int delete_script(int pi, unsigned script_id)
+function delete_script(p::Int32, script_id::Int32)
+    return ccall((:delete_script, libpigpiod_if2), Int32, (Int32, UInt32), p, script_id)
+end
+
 # FILES
 # WAVES
+
 # UTILITIES
 export time_time, time_sleep, pigpio_error
 function time_time()
@@ -258,7 +288,7 @@ function time_sleep(seconds::Float64)
     return ccall((:time_sleep, libpigpiod_if2), Cvoid, (Cdouble,), seconds)
 end
 
-function pigpio_error(errnum::PIGPIO_ERROR)
+function pigpio_error(errnum::Int)
     error_str = ccall((:pigpio_error, libpigpiod_if2), Cstring, (Int32,), errnum)
     return unsafe_string(error_str)
 end
