@@ -4,6 +4,7 @@ using Libdl
 using pigpiod_if2_jll
 
 include("constants.jl")
+include("i2c.jl")
 export INPUT, OUTPUT
 export PUD_UP, PUD_OFF, PUD_DOWN
 export HIGH, LOW

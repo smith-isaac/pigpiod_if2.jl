@@ -49,8 +49,9 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - May just copy `constants.jl` from the [PiGPIO.jl](https://github.com/JuliaBerry/PiGPIO.jl) library
   - Make the global variables *not* enumerations
 - [ ] Figure out how to work with the `pthread.h` library, for threading functions.
-- [ ] Break out function wrappers into separate files (i.e. `i2c.jl`, `spi.jl`, ...)
+- [x] Break out function wrappers into separate files (i.e. `i2c.jl`, `spi.jl`, ...)
 - [ ] Figure out why the `callback` function is not working right now (getting segfaults)
+- [ ] Test working with the I2C functions, especially `bsc_xfer` and `bsc_i2c` since both of them use the `bsc_xfer_t` struct
 - Create wrappers for functions from C library (organizing by type)
   - [x] Essential
   - [x] Basic
@@ -61,8 +62,8 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - [x] Custom (Skipping)
   - [x] Events
   - [x] Scripts
-  - [ ] I2C (Bit Bang)
-  - [ ] I2C/SPI Slave
+  - [x] I2C (Bit Bang)
+  - [x] I2C/SPI Slave
   - [ ] Serial (Bit Bang)
   - [ ] SPI (Bit Bang)
   - [ ] Files
