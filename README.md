@@ -68,5 +68,5 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - [x] Serial (Bit Bang)
   - [x] SPI (Bit Bang)
   - [x] Files
-  - [ ] Waves
+  - [x] Waves
   - [x] Utilities
