@@ -52,6 +52,7 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
 - [x] Break out function wrappers into separate files (i.e. `i2c.jl`, `spi.jl`, ...)
 - [ ] Figure out why the `callback` function is not working right now (getting segfaults)
 - [ ] Test working with the I2C functions, especially `bsc_xfer` and `bsc_i2c` since both of them use the `bsc_xfer_t` struct
+- [ ] Test working with file functions since there are arrays of characters which could be `UInt8` or characters
 - Create wrappers for functions from C library (organizing by type)
   - [x] Essential
   - [x] Basic
@@ -64,8 +65,8 @@ ccall((:pigpio_start, libpigpiod_if2), Cint, (Cstring, Cstring), Nothing, Nothin
   - [x] Scripts
   - [x] I2C (Bit Bang)
   - [x] I2C/SPI Slave
-  - [ ] Serial (Bit Bang)
-  - [ ] SPI (Bit Bang)
-  - [ ] Files
+  - [x] Serial (Bit Bang)
+  - [x] SPI (Bit Bang)
+  - [x] Files
   - [ ] Waves
   - [x] Utilities

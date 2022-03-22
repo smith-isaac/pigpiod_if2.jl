@@ -3,8 +3,11 @@ module pigpiod_if2
 using Libdl
 using pigpiod_if2_jll
 
-include("constants.jl")
-include("i2c.jl")
+include("./constants.jl")
+include("./i2c.jl")
+include("./serial.jl")
+include("./spi.jl")
+include("./waves.jl")
 export INPUT, OUTPUT
 export PUD_UP, PUD_OFF, PUD_DOWN
 export HIGH, LOW
@@ -277,7 +280,48 @@ function delete_script(p::Int32, script_id::Int32)
 end
 
 # FILES
-# WAVES
+#  file_open	Opens a file
+#  int file_open(int pi, char *file, unsigned mode)
+#  This function returns a handle to a file opened in a specified mode.
+function file_open(p::Int32, file::String, mode::Int)
+    return ccall((:file_open, libpigpiod_if2), Int32, (Int32, Cstring, UInt32), p, file, mode)
+end
+
+#  file_close	Closes a file
+#  int file_close(int pi, unsigned handle)
+#  This function closes the file associated with handle.
+function file_close(p::Int32, handle::Int32)
+    return ccall((:file_close, libpigpiod_if2), Int32, (Int32, UInt32), p, handle)
+end
+
+#  file_read	Reads bytes from a file
+#  int file_read(int pi, unsigned handle, char *buf, unsigned count)
+#  This function reads up to count bytes from the the file associated with handle and writes them to buf.
+function file_read(p::Int32, handle::Int32, buf::Vector{Int}, count::Int)
+    return ccall((:file_read, libpigpiod_if2), Int32, (Int32, UInt32, Ref{UInt8}, UInt32), p, handle, buf, count)
+end
+
+#  file_write	Writes bytes to a file
+#  int file_write(int pi, unsigned handle, char *buf, unsigned count)
+#  This function writes count bytes from buf to the the file associated with handle.
+#  Figure out if I need to change the vector type to a character instead of an Int
+function file_write(p::Int32, handle::Int32, buf::Vector{Int}, count::Int)
+    return ccall((:file_write, libpigpiod_if2), Int32, (Int32, UInt32, Ref{UInt8}, UInt32), p, handle, buf, count)
+end
+
+#  file_seek	Seeks to a position within a file
+#  int file_seek(int pi, unsigned handle, int32_t seekOffset, int seekFrom)
+#  This function seeks to a position within the file associated with handle.
+function file_seek(p::Int32, handle::Int32, seekOffset::Int, seekFrom::Int)
+    return ccall((:file_seek, libpigpiod_if2), Int32, (Int32, UInt32, Int32, Int32), p, handle, seekOffset, seekFrom)
+end
+
+#  file_list	List files which match a pattern
+#  int file_list(int pi, char *fpat, char *buf, unsigned count)
+#  This function returns a list of files which match a pattern.
+function file_list(p::Int32, fpat::String, buf::String, count::Int)
+    return ccall((:file_list, libpigpiod_if2), Int32, (Int32, Cstring, Cstring, UInt32), p, fpat, buf, count)
+end
 
 # UTILITIES
 export time_time, time_sleep, pigpio_error
